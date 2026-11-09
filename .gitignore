@@ -1,0 +1,15 @@
+# Build output & dependencies (web app)
+web/node_modules/
+web/dist/
+
+# Python caches (extension training/dev tooling)
+dev/__pycache__/
+**/__pycache__/
+
+# Misc
+*.log
+.DS_Store
+Thumbs.db
+
+# The site's own zip lives in web/public/downloads/ and IS committed
+# (it's the real extension package distributed by the website).

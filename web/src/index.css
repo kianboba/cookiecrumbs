@@ -1,0 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  CookieCrumbs design system — dark-first, light fallback via prefers-color-scheme.
+  Ported from site/css/styles.css, expressed as CSS custom properties that the
+  Tailwind config resolves (see tailwind.config.js).
+*/
+
+:root {
+  color-scheme: dark;
+  --bg: #0d1512;
+  --surface: #14201b;
+  --surface-2: #1a2721;
+  --border: #24352e;
+  --text: #e8f0ec;
+  --text-strong: #f6fbf8;
+  --muted: #97aaa2;
+  --muted-dim: #6f857c;
+  --amber: #e8a33d;
+  --amber-strong: #f0b45a;
+  --amber-soft: rgba(232, 163, 61, .14);
+  --teal: #3ecfa8;
+  --teal-soft: rgba(62, 207, 168, .12);
+  --red: #d96457;
+  --red-soft: rgba(217, 100, 87, .16);
+  --btn-ink: #201505;
+  --radius: 14px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --bg: #f6f4ef;
+    --surface: #ffffff;
+    --surface-2: #f4f1ea;
+    --border: #ddd6c9;
+    --text: #1c2522;
+    --text-strong: #131b18;
+    --muted: #5b6a63;
+    --muted-dim: #7d8c85;
+    /* Light-mode accents tuned ≥4.5:1 against their backgrounds (Lighthouse AA) */
+    --amber: #c07f24;
+    --amber-strong: #8a5a16;
+    --amber-soft: rgba(176, 110, 26, .12);
+    --teal: #126a54;
+    --teal-soft: rgba(29, 138, 110, .1);
+    --red: #943827;
+    --red-soft: rgba(176, 74, 62, .12);
+    --btn-ink: #1a1004;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink-50 text-ink-800 antialiased;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-teal;
+  }
+  ::selection {
+    background: var(--amber-soft);
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 2xl:max-w-[90rem] 2xl:px-12;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors
+      focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    background-color: var(--amber);
+    color: var(--btn-ink);
+    @apply btn;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.08);
+    background-color: var(--amber);
+  }
+  .btn-secondary {
+    @apply btn border border-ink-200 bg-transparent text-ink-800 hover:bg-ink-100;
+  }
+  .btn-ghost {
+    @apply btn text-ink-700 hover:bg-ink-100;
+  }
+  .card {
+    @apply rounded-xl border border-ink-200 bg-surface shadow-card p-6 lg:p-7 2xl:p-8;
+  }
+  .section {
+    @apply py-12 sm:py-16 lg:py-20 2xl:py-24;
+  }
+  .section-alt {
+    background: var(--surface-2);
+  }
+  .heading-1 {
+    @apply text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl;
+  }
+  .heading-2 {
+    @apply text-2xl font-semibold tracking-tight text-ink-900 sm:text-3xl;
+  }
+  .heading-3 {
+    @apply text-xl font-semibold text-ink-900;
+  }
+  .muted {
+    @apply text-ink-500;
+  }
+
+  /* Sticky blurred header (matches the landing nav). */
+  .site-header {
+    @apply sticky top-0 z-40 border-b border-ink-200;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+  }
+  /* Mobile drawer equivalent. */
+  .site-drawer {
+    @apply border-b border-ink-200 shadow-card;
+    background: var(--bg);
+  }
+
+  /* Numbered step badge (amber on dark ink, matches landing steps). */
+  .step-badge {
+    @apply inline-flex shrink-0 items-center justify-center rounded-full text-sm font-bold;
+    background: var(--amber-soft);
+    color: var(--amber-strong, var(--amber));
+    width: 2rem;
+    height: 2rem;
+  }
+
+  /* Feature icon tile. */
+  .icon-tile {
+    @apply flex h-10 w-10 items-center justify-center rounded-lg;
+    background: var(--amber-soft);
+    color: var(--amber);
+  }
+
+  /* Category chips (cookie table + future uses). */
+  .chip {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+  .chip-adv { background: var(--red-soft); color: var(--red); }
+  .chip-perf { background: var(--amber-soft); color: var(--amber); }
+  .chip-func { background: var(--teal-soft); color: var(--teal); }
+  .chip-blocked { background: var(--border); color: var(--muted); text-decoration: line-through; }
+}
+
+/* ===== Hero panel mock (ported from the landing page; CSS-only illustration) ===== */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: .82rem;
+}
+.panel-head {
+  @apply flex items-center gap-2 border-b border-ink-200 px-4 py-3;
+  background: var(--surface-2);
+}
+.panel-domain { margin-left: auto; color: var(--muted); font-family: var(--font-mono, ui-monospace); font-size: .72rem; }
+.panel-score { display: flex; gap: .9rem; align-items: center; padding: 1rem; }
+.score-ring {
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border-radius: 50%;
+  background: conic-gradient(var(--red) calc(var(--p, 34) * 3.6deg), var(--border) 0);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.score-ring::before {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--surface);
+}
+.score-ring span { position: relative; font-weight: 800; font-size: 1.15rem; color: var(--text-strong); }
+.score-label { margin: 0; color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; }
+.score-verdict { margin: 0; font-size: 1.15rem; font-weight: 750; }
+.score-poor { color: var(--red); }
+.score-good { color: var(--teal); }
+.score-detail { margin: 0; color: var(--muted); font-size: .72rem; }
+.panel-table { width: 100%; border-collapse: collapse; }
+.panel-table th {
+  @apply border-y border-ink-200 px-4 py-2 text-left text-xs uppercase tracking-wide;
+  color: var(--muted);
+  background: var(--surface-2);
+  font-size: .68rem;
+}
+.panel-table td { @apply border-t border-ink-200 px-4 py-2 font-mono text-xs; font-size: .74rem; }
+.panel-table tbody tr:nth-child(odd) td { background: color-mix(in srgb, var(--surface-2) 45%, transparent); }
+
+/* Hero artwork: teal/amber ambient gradients on the page background. */
+.hero-wrap {
+  background:
+    radial-gradient(900px 420px at 85% -10%, var(--teal-soft), transparent 70%),
+    radial-gradient(700px 380px at 0% 20%, var(--amber-soft), transparent 70%);
+}
+
+/* Version badge (hero). */
+.version-badge {
+  @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold;
+  background: var(--teal-soft);
+  border: 1px solid color-mix(in srgb, var(--teal) 30%, transparent);
+  color: var(--teal);
+}
+.badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+
+/* "What CookieCrumbs never does" list. */
+.never-list { @apply my-0 grid gap-2 p-0 text-sm; list-style: none; }
+.never-list li { @apply relative pl-8; }
+.never-list li::before {
+  content: "✕";
+  position: absolute;
+  left: 0;
+  color: var(--red);
+  font-weight: 800;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* Light mode: small chip text needs darker ink than the accent variables the
+   containers use (written after the base rules so it wins the cascade). */
+@media (prefers-color-scheme: light) {
+  .chip-adv { color: #8f3527; }
+  .chip-perf { color: #7f4e12; }
+  .chip-func { color: #126a54; }
+  .chip-blocked { color: #3f4b46; }
+  /* Brand-colored text links must beat white/surface cards (≥4.5:1). */
+  .text-brand-600, .text-brand-700 { color: #8a5a16; }
+  .hover\:text-brand-600:hover, .hover\:text-brand-700:hover { color: #8a5a16; }
+  .hover\:brand-300:hover, .hover\:border-brand-300:hover { border-color: #8a5a16; }
+}

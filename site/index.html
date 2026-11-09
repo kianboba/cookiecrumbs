@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CookieCrumbs — See every cookie. Understand your privacy.</title>
+  <meta name="description" content="CookieCrumbs is a Chrome extension that detects, classifies, and blocks tracking cookies as you browse, and scores every site's privacy from 0–100. Runs 100% locally — no accounts, no telemetry.">
+  <link rel="icon" type="image/png" href="assets/icon48.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CookieCrumbs — See every cookie. Understand your privacy.">
+  <meta property="og:description" content="Detect, classify, and block tracking cookies as you browse. Privacy score for every site. 100% local.">
+  <meta property="og:image" content="assets/icon128.png">
+  <meta name="theme-color" content="#0d1512">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===== 1. Nav ===== -->
+  <header class="site-header">
+    <div class="container nav-row">
+      <a class="brand" href="#top" aria-label="CookieCrumbs home">
+        <img src="assets/icon48.png" alt="" width="28" height="28">
+        <span>CookieCrumbs</span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <a href="#how-it-works">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#install">Install</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-primary btn-small" href="#install">Install</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== 2. Hero ===== -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="version-badge">
+            <span class="badge-dot" aria-hidden="true"></span>
+            v5.19 · actively maintained
+          </p>
+          <h1>See every cookie.<br>Understand your privacy.</h1>
+          <p class="hero-sub">
+            CookieCrumbs watches every cookie a site sets, classifies what each one is for,
+            blocks trackers before they load, and gives every website a privacy score —
+            all on your machine.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#install">Install for Chrome</a>
+            <a class="btn btn-ghost" href="#how-it-works">See how it works ↓</a>
+          </div>
+          <p class="hero-note">Free · Manifest V3 · No sign-up</p>
+        </div>
+
+        <!-- Panel mock: replace with annotated screenshot when available (Phase 0) -->
+        <div class="panel-mock" role="img" aria-label="Mock of the CookieCrumbs side panel showing a cookie table and a privacy score of 34 out of 100 labelled 'Poor'">
+          <div class="panel">
+            <div class="panel-head">
+              <img src="assets/icon48.png" alt="" width="20" height="20">
+              <strong>CookieCrumbs</strong>
+              <span class="panel-domain">example-shop.test</span>
+            </div>
+            <div class="panel-score">
+              <div class="score-ring" data-score="34" aria-hidden="true"><span>34</span></div>
+              <div>
+                <p class="score-label">Privacy score</p>
+                <p class="score-verdict score-poor">Poor</p>
+                <p class="score-detail">11 third-party · 6 advertising · 4 persistent</p>
+              </div>
+            </div>
+            <table class="panel-table" aria-hidden="true">
+              <thead><tr><th>Cookie</th><th>Party</th><th>Category</th><th>Expires</th></tr></thead>
+              <tbody>
+                <tr><td>_ga</td><td>3rd</td><td><span class="chip chip-adv">Advertising</span></td><td>2 y</td></tr>
+                <tr><td>_fbp</td><td>3rd</td><td><span class="chip chip-adv">Advertising</span></td><td>3 mo</td></tr>
+                <tr><td>_pk_id</td><td>1st</td><td><span class="chip chip-perf">Performance</span></td><td>397 d</td></tr>
+                <tr><td>csrftoken</td><td>1st</td><td><span class="chip chip-func">Functionality</span></td><td>1 y</td></tr>
+                <tr><td>ccx_lower</td><td>1st</td><td><span class="chip chip-perf">Performance</span></td><td>1 mo</td></tr>
+                <tr><td>__trace_ux</td><td>3rd</td><td><span class="chip chip-blocked">Blocked</span></td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. Trust strip ===== -->
+    <section class="trust-strip" aria-label="Data sources">
+      <div class="container trust-row">
+        <p class="trust-lead">Classification powered by open research:</p>
+        <ul class="trust-list">
+          <li>CookieBlock <small>(USENIX 2022)</small></li>
+          <li>Open Cookie Database</li>
+          <li>Disconnect.me</li>
+          <li>Consent-O-Matic</li>
+        </ul>
+        <p class="trust-note">Runs entirely in your browser.</p>
+      </div>
+    </section>
+
+    <!-- ===== 4. How it works ===== -->
+    <section id="how-it-works" class="section">
+      <div class="container">
+        <h2>How it works</h2>
+        <p class="section-sub">Three steps, zero configuration. It starts protecting the moment it's installed.</p>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num" aria-hidden="true">1</span>
+            <h3>Browse normally</h3>
+            <p>Cookies are set as they always are — you don't change a thing.</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">2</span>
+            <h3>CookieCrumbs watches locally</h3>
+            <p>Every cookie is detected and classified by an on-device model: Strict, Performance, Functionality, Advertising, or Unknown.</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">3</span>
+            <h3>Score &amp; automatic protection</h3>
+            <p>Each site gets a 0–100 privacy score with a plain-English label — while tracking cookies and tracker domains are blocked automatically.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== 5. Features grid ===== -->
+    <section id="features" class="section section-alt">
+      <div class="container">
+        <h2>Everything in one panel</h2>
+        <p class="section-sub">Detection, protection, and control — without visiting a dashboard.</p>
+        <div class="features-grid">
+          <article class="feature">
+            <h3>Cookie Detection</h3>
+            <p>Sees every cookie a site sets: first-party, third-party, session, persistent, JavaScript-set, and partitioned.</p>
+          </article>
+          <article class="feature">
+            <h3>Classification &amp; Cookie Table</h3>
+            <p>Every cookie sorted into five purpose categories, listed with party, lifespan, and security flags. Click a row for plain-English detail.</p>
+          </article>
+          <article class="feature">
+            <h3>Privacy Score</h3>
+            <p>A 0–100 score for every site, based on cookie category, party, persistence, and known-tracker status — with an honest label, not a vibe.</p>
+          </article>
+          <article class="feature">
+            <h3>Tracking Protection</h3>
+            <p>Blocks tracking cookies as you browse and stops tracker domains at the network level before their requests fire. Essential cookies are preserved. Always on, by design.</p>
+          </article>
+          <article class="feature">
+            <h3>Session Guard</h3>
+            <p>Removes weak session cookies — the ones missing Secure or HttpOnly — after you leave a site, so they can't be hijacked later. Toggleable anytime.</p>
+          </article>
+          <article class="feature">
+            <h3>Consent Transparency</h3>
+            <p>Before you accept a cookie banner, CookieCrumbs pauses and shows what will be collected and which companies receive it.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. Privacy statement ===== -->
+    <section id="privacy" class="section privacy-block">
+      <div class="container privacy-inner">
+        <h2>What CookieCrumbs never does</h2>
+        <p class="privacy-lead">
+          A tool about cookies shouldn't come with cookies of its own. CookieCrumbs is
+          <strong>local-first</strong>: every analysis happens on your machine, inside your browser.
+        </p>
+        <ul class="never-list">
+          <li>Doesn't collect, transmit, or sell any data</li>
+          <li>Has no servers — there's nothing to log in to</li>
+          <li>No accounts, no telemetry, no analytics</li>
+          <li>Sets no cookies of its own</li>
+        </ul>
+        <p class="privacy-note">The source of truth is your own browser: disconnect any network and everything keeps working.</p>
+      </div>
+    </section>
+
+    <!-- ===== 7. Install ===== -->
+    <section id="install" class="section">
+      <div class="container install-grid">
+        <div>
+          <h2>Install in 2 minutes</h2>
+          <ol class="install-steps">
+            <li>
+              <span class="step-num" aria-hidden="true">1</span>
+              <div><h3>Download the extension folder</h3>
+              <p>Grab the zip/folder from <a href="https://github.com/" rel="noopener">GitHub</a> and unpack it.</p></div>
+            </li>
+            <li>
+              <span class="step-num" aria-hidden="true">2</span>
+              <div><h3>Open <code>chrome://extensions</code></h3>
+              <p>Paste it in the address bar of Chrome or any Chromium browser.</p></div>
+            </li>
+            <li>
+              <span class="step-num" aria-hidden="true">3</span>
+              <div><h3>Enable Developer mode</h3>
+              <p>Toggle it in the top-right corner of the extensions page.</p></div>
+            </li>
+            <li>
+              <span class="step-num" aria-hidden="true">4</span>
+              <div><h3>Click “Load unpacked”</h3>
+              <p>Select the unpacked folder. The CookieCrumbs icon appears in your toolbar.</p></div>
+            </li>
+          </ol>
+          <p class="install-note">Web Store listing is planned — this manual install is the official method until then.</p>
+        </div>
+        <aside class="install-aside">
+          <h3>Requirements</h3>
+          <ul>
+            <li>Chrome or any Chromium-based browser</li>
+            <li>Manifest V3 support</li>
+            <li>Nothing else. No accounts, no downloads at runtime</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== 8. FAQ ===== -->
+    <section id="faq" class="section section-alt">
+      <div class="container container-narrow">
+        <h2>FAQ</h2>
+        <div class="faq">
+          <details>
+            <summary>Does CookieCrumbs collect my data?</summary>
+            <p>No. Every analysis runs inside your browser. Nothing is transmitted anywhere — the extension even works fully offline. Each Chrome permission exists for a local job: reading cookies, blocking tracker requests, and rendering the side panel.</p>
+          </details>
+          <details>
+            <summary>Will it break websites?</summary>
+            <p>Both protection systems come with per-site exemptions. If a site misbehaves, click <em>Exempt this site</em> from the panel — two independent whitelists exist: one for Tracking Protection, one for Session Guard.</p>
+          </details>
+          <details>
+            <summary>Can I turn off blocking?</summary>
+            <p>Tracking Protection is always on by design — that's the point. Session Guard is individually toggleable, and per-site exemptions are available for both.</p>
+          </details>
+          <details>
+            <summary>What powers the classification?</summary>
+            <p>An on-device model trained on public research datasets: CookieBlock (USENIX 2022), the Open Cookie Database, Disconnect.me tracker lists, and Consent-O-Matic category data. The datasets link in the trust strip above are the same sources.</p>
+          </details>
+          <details>
+            <summary>Why “Load unpacked”? Will it be on the Web Store?</summary>
+            <p>A Web Store listing is planned; until then, manual install is the official method. A store badge slot is reserved on this page.</p>
+          </details>
+          <details>
+            <summary>Which browsers are supported?</summary>
+            <p>Chrome and any Chromium-based browser with Manifest V3 support — including Edge, Brave, and Opera.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 9. Footer ===== -->
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <div class="brand">
+          <img src="assets/icon48.png" alt="" width="22" height="22">
+          <span>CookieCrumbs</span>
+        </div>
+        <p>© 2026 CookieCrumbs. Not affiliated with Google. “CookieCrumbs” analyzes cookies; it never serves any.</p>
+        <!-- Web Store badge placeholder: swap CTA here once listed -->
+        <p><a href="https://github.com/" rel="noopener">GitHub</a></p>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
