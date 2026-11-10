@@ -34,6 +34,14 @@ export function SplashScreen() {
   const [mounted, setMounted] = useState(enabled);
 
   useEffect(() => {
+    if (mounted) return undefined;
+    // Splash is no longer in the DOM — make sure scrolling is always restored,
+    // regardless of how quickly the timers were reached.
+    document.body.style.overflow = "";
+    return undefined;
+  }, [mounted]);
+
+  useEffect(() => {
     if (!enabled) return undefined;
     document.body.style.overflow = "hidden";
     const revealTimer = window.setTimeout(() => setMounted(false), REVEAL_MS);
