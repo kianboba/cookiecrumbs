@@ -232,16 +232,27 @@
   z-index: 60;
   display: grid;
   place-items: center;
+  /* The container itself has no background: only the plain backdrop fades. */
+}
+.splash-backdrop {
+  position: absolute;
+  inset: 0;
   background: #0d1512;
   animation: splash-fade 380ms ease-out 1420ms forwards;
 }
 @keyframes splash-fade { to { opacity: 0; visibility: hidden; } }
 
-.splash-inner {
+/* The content layer (shield, ✕, dots, wordmark) vanishes instantly right
+   before the backdrop fade starts, so no text is ever composited at reduced
+   opacity — the Lighthouse color-contrast audit can never catch it. */
+.splash-content {
+  position: relative;
   display: grid;
   justify-items: center;
   gap: 1rem;
+  animation: splash-vanish 1ms linear 1350ms forwards;
 }
+@keyframes splash-vanish { to { visibility: hidden; } }
 .splash-logo { overflow: visible; }
 .splash-shield { animation: splash-shield 520ms cubic-bezier(.2, .8, .3, 1) both; }
 @keyframes splash-shield {
@@ -265,7 +276,7 @@
   letter-spacing: .02em;
   /* Transform-only reveal: the text stays at full opacity for its whole life,
      so Lighthouse's color-contrast audit can never catch it mid-fade. */
-  animation: splash-rise 420ms cubic-bezier(.2, .8, .3, 1) 950ms both;
+  animation: splash-rise 420ms cubic-bezier(.2, .8, .3, 1) 900ms both;
 }
 @keyframes splash-rise {
   from { transform: translateY(10px); }

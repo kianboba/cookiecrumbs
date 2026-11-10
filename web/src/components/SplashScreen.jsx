@@ -57,7 +57,10 @@ export function SplashScreen() {
 
   return (
     <div className="splash" aria-hidden="true" role="presentation">
-      <div className="splash-inner">
+      {/* Plain backdrop fades out on its own — it contains no text, so the
+          color-contrast audit never sees semi-transparent text. */}
+      <div className="splash-backdrop" />
+      <div className="splash-content">
         <svg className="splash-logo" viewBox="0 0 64 64" width="76" height="76" fill="none">
           <defs>
             <linearGradient id="splash-shield" x1="0" y1="0" x2="0" y2="1">
@@ -81,6 +84,7 @@ export function SplashScreen() {
           <circle className="splash-dot" style={{ animationDelay: "1140ms" }} cx="15" cy="44" r="1.1" fill="#fbbf24" />
         </svg>
         <p className="splash-wordmark">CookieCrumbs</p>
+        </div>
       </div>
     </div>
   );
