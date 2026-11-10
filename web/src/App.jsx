@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Header } from "./components/layout/Header.jsx";
 import { Footer } from "./components/layout/Footer.jsx";
 import { ErrorBoundary } from "./components/common/ErrorBoundary.jsx";
+import { SplashScreen } from "./components/SplashScreen.jsx";
 
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
 const DownloadsPage = lazy(() => import("./pages/DownloadsPage.jsx"));
@@ -21,6 +22,7 @@ function Loading() {
 export default function App() {
   return (
     <div className="flex min-h-screen flex-col">
+      <SplashScreen />
       <Header />
       <main className="flex-1">
         <ErrorBoundary>

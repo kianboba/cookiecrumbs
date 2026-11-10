@@ -225,9 +225,56 @@
   font-weight: 800;
 }
 
+/* ===== Entry splash (once per session; see components/SplashScreen.jsx) ===== */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: #0d1512;
+  animation: splash-fade 380ms ease-out 1420ms forwards;
+}
+@keyframes splash-fade { to { opacity: 0; visibility: hidden; } }
+
+.splash-inner {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+}
+.splash-logo { overflow: visible; }
+.splash-shield { animation: splash-shield 520ms cubic-bezier(.2, .8, .3, 1) both; }
+@keyframes splash-shield {
+  from { opacity: 0; transform: scale(.8); filter: blur(6px); }
+}
+.splash-x {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: splash-draw 420ms ease-out 320ms forwards;
+}
+.splash-x-2 { animation-delay: 470ms; }
+@keyframes splash-draw { to { stroke-dashoffset: 0; } }
+.splash-dot { animation: splash-pop 260ms cubic-bezier(.2, .8, .3, 1) both; }
+@keyframes splash-pop {
+  from { opacity: 0; transform: scale(0); }
+}
+.splash-wordmark {
+  margin: 0;
+  color: var(--text-strong, #f6fbf8);
+  font-weight: 800;
+  letter-spacing: .02em;
+  animation: splash-fade-in 420ms ease-out 950ms both;
+}
+@keyframes splash-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
+  /* Belt and suspenders: the reduced-motion screen (above) would freeze the
+     overlay's fade-out, so never render it at all for these users. */
+  .splash { display: none !important; }
 }
 
 /* Light mode: small chip text needs darker ink than the accent variables the
