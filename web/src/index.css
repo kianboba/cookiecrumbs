@@ -238,34 +238,43 @@
   position: absolute;
   inset: 0;
   background: #0d1512;
-  animation: splash-fade 380ms ease-out 1420ms forwards;
+  animation: splash-fade 360ms ease-out 1540ms forwards;
 }
 @keyframes splash-fade { to { opacity: 0; visibility: hidden; } }
 
-/* The content layer (shield, ✕, dots, wordmark) vanishes instantly right
-   before the backdrop fade starts, so no text is ever composited at reduced
-   opacity — the Lighthouse color-contrast audit can never catch it. */
+/* The content layer (shield, padlock, cookie, satellites, wordmark) vanishes
+   instantly right before the backdrop fade starts, so no text is ever
+   composited at reduced opacity — the Lighthouse color-contrast audit can
+   never catch it. */
 .splash-content {
   position: relative;
   display: grid;
   justify-items: center;
   gap: 1rem;
-  animation: splash-vanish 1ms linear 1350ms forwards;
+  animation: splash-vanish 1ms linear 1480ms forwards;
 }
 @keyframes splash-vanish { to { visibility: hidden; } }
 .splash-logo { overflow: visible; }
-.splash-shield { animation: splash-shield 520ms cubic-bezier(.2, .8, .3, 1) both; }
-@keyframes splash-shield {
-  from { opacity: 0; transform: scale(.8); filter: blur(6px); }
-}
-.splash-x {
+/* Shield outline draws itself (pathLength=100 normalizes the dash length). */
+.splash-shield {
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
-  animation: splash-draw 420ms ease-out 320ms forwards;
+  animation: splash-draw 580ms ease-in-out 60ms forwards;
 }
-.splash-x-2 { animation-delay: 470ms; }
 @keyframes splash-draw { to { stroke-dashoffset: 0; } }
-.splash-dot { animation: splash-pop 260ms cubic-bezier(.2, .8, .3, 1) both; }
+/* Padlock drops in with a click-bounce settle. */
+.splash-lock { animation: splash-lock 520ms cubic-bezier(.3, 1.4, .55, 1) 560ms both; }
+@keyframes splash-lock {
+  0% { opacity: 0; transform: translateY(-12px); }
+  70% { opacity: 1; transform: translateY(2px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+/* Cookie + satellite icons pop in around the center (delays set inline). */
+.splash-pop {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: splash-pop 200ms cubic-bezier(.2, .8, .3, 1) both;
+}
 @keyframes splash-pop {
   from { opacity: 0; transform: scale(0); }
 }
