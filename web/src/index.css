@@ -299,6 +299,33 @@
   from { transform: translateY(10px); }
 }
 
+/* ===== Floating background cookie (all routes; see FloatingCookie.jsx) ===== */
+.floating-cookie {
+  position: fixed;
+  right: -3rem;
+  bottom: -3rem;
+  z-index: -1;
+  opacity: .09;
+  pointer-events: none;
+  /* Parallax drift set from JS onto a custom property; transform composes
+     with the group-level bob rotation below. */
+  transform: translateY(var(--cookie-drift, 0px));
+  will-change: transform;
+}
+@media (prefers-color-scheme: light) {
+  .floating-cookie { opacity: .12; }
+}
+/* Very slow idle bob on the artwork itself so the transform layers compose. */
+.floating-cookie-bob {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cookie-bob 9s ease-in-out infinite alternate;
+}
+@keyframes cookie-bob {
+  from { transform: rotate(-4deg) translateY(-7px); }
+  to { transform: rotate(7deg) translateY(9px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
