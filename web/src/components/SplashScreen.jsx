@@ -84,7 +84,6 @@ export function SplashScreen() {
           <circle className="splash-dot" style={{ animationDelay: "1140ms" }} cx="15" cy="44" r="1.1" fill="#fbbf24" />
         </svg>
         <p className="splash-wordmark">CookieCrumbs</p>
-        </div>
       </div>
     </div>
   );
