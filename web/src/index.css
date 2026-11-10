@@ -305,7 +305,7 @@
   top: 0;
   left: 0;
   z-index: -1;
-  opacity: .1;
+  opacity: .11;
   pointer-events: none;
   /* Slot + glide: JS moves the cookie between section slots via `translate`,
      the transition makes each reposition a smooth drift. */
@@ -313,7 +313,7 @@
   will-change: translate;
 }
 @media (prefers-color-scheme: light) {
-  .floating-cookie { opacity: .13; }
+  .floating-cookie { opacity: .15; }
 }
 @media (max-width: 767px) {
   .floating-cookie { opacity: .07; }
@@ -336,6 +336,32 @@
 @keyframes cookie-drift {
   from { transform: translateY(-8px) rotate(-5deg); }
   to { transform: translateY(10px) rotate(6deg); }
+}
+
+/* ===== Hero cookie band (shattered-cookie scroll scene) ===== */
+.hero-cookie-band {
+  position: relative;
+  height: clamp(220px, 29vw, 380px);
+  overflow: hidden;
+  pointer-events: none;
+}
+/* The scene renders cookie-space 1:1 with pixels; centered in the band. */
+.hero-cookie-scene {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(300px, 40vw, 430px);
+  height: clamp(300px, 40vw, 430px);
+  translate: -50% -50%;
+  overflow: visible;
+}
+.hero-chunk {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.hero-crumb {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 @media (prefers-reduced-motion: reduce) {

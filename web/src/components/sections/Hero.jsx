@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { siteConfig } from "../../data/siteConfig.js";
 import { Icon } from "../common/Icon.jsx";
+import { HeroCookieScene } from "../HeroCookieScene.jsx";
 import logoUrl from "../../assets/cookiecrumbs-logo.svg";
 
 const cookieRows = [
@@ -126,6 +127,11 @@ export function Hero() {
           </p>
         </div>
         <PanelMock />
+      </div>
+
+      {/* Shattered-cookie centerpiece: broken pieces reassemble as you scroll. */}
+      <div className="hero-cookie-band">
+        <HeroCookieScene />
       </div>
     </section>
   );
