@@ -271,7 +271,9 @@
 }
 .splash-wordmark {
   margin: 0;
-  color: var(--text-strong, #f6fbf8);
+  /* Hard-coded: the backdrop is always near-black in both color schemes, so
+     the light-mode --text-strong (dark ink) must never resolve here. */
+  color: #f6fbf8;
   font-weight: 800;
   letter-spacing: .02em;
   /* Transform-only reveal: the text stays at full opacity for its whole life,
