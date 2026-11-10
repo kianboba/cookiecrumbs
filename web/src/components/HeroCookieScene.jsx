@@ -112,9 +112,15 @@ export function HeroCookieScene() {
     }
 
     let raf = 0;
+    let tries = 0;
     const render = () => {
+      raf = 0;
       const rect = root.getBoundingClientRect();
-      if (rect.width > 0) {
+      if (rect.width === 0) {
+        // Layout not ready yet (lazy chunk / styles) — retry next frame.
+        if (tries++ < 300) raf = requestAnimationFrame(render);
+        return;
+      }
         const vh = window.innerHeight;
         const t = Math.min(1, Math.max(0, (vh * 0.66 - (rect.top + rect.height / 2)) / (vh * 0.95)));
         const settle = Math.min(1, Math.max(0, (t - 0.82) / 0.18));
@@ -147,8 +153,6 @@ export function HeroCookieScene() {
 
         root.style.opacity = (1 - 0.62 * settle).toFixed(3);
         if (glow) glow.style.opacity = (0.5 * Math.min(1, t * 2) * (1 - settle)).toFixed(3);
-      }
-      raf = 0;
     };
 
     const onScroll = () => {
@@ -212,7 +216,12 @@ export function HeroCookieScene() {
             chunkRefs.current[i] = el;
           }}
           className="hero-chunk"
-          style={{ willChange: "transform, opacity, filter" }}
+          style={{
+            transform: `translate(${c.dx}px, ${c.dy}px) rotate(${c.srot}deg) scale(${c.s})`,
+            opacity: 0.5,
+            filter: "blur(2.4px)",
+            willChange: "transform, opacity, filter",
+          }}
         >
           <g transform={`rotate(${c.rot})`}>
             <path d={CHUNK_D} fill="url(#hc-dough)" stroke="#8a5a1c" strokeOpacity="0.35" strokeWidth="3" strokeLinejoin="round" />
@@ -229,7 +238,12 @@ export function HeroCookieScene() {
             crumbRefs.current[i] = el;
           }}
           className="hero-crumb"
-          style={{ willChange: "transform, opacity, filter" }}
+          style={{
+            transform: `translate(${cr.sx}px, ${cr.sy}px) rotate(${cr.srot}deg)`,
+            opacity: 0.35,
+            filter: "blur(1.6px)",
+            willChange: "transform, opacity, filter",
+          }}
         >
           <g transform={`translate(${cr.fx} ${cr.fy}) rotate(${cr.prot}) scale(${cr.r / 13})`}>
             <ellipse rx="13" ry="11" fill="#c99044" />
