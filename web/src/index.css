@@ -263,10 +263,12 @@
   color: var(--text-strong, #f6fbf8);
   font-weight: 800;
   letter-spacing: .02em;
-  animation: splash-fade-in 420ms ease-out 950ms both;
+  /* Transform-only reveal: the text stays at full opacity for its whole life,
+     so Lighthouse's color-contrast audit can never catch it mid-fade. */
+  animation: splash-rise 420ms cubic-bezier(.2, .8, .3, 1) 950ms both;
 }
-@keyframes splash-fade-in {
-  from { opacity: 0; transform: translateY(4px); }
+@keyframes splash-rise {
+  from { transform: translateY(10px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
