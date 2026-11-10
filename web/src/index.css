@@ -299,6 +299,45 @@
   from { transform: translateY(10px); }
 }
 
+/* ===== Floating background cookie (all routes; see FloatingCookie.jsx) ===== */
+.floating-cookie {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: .1;
+  pointer-events: none;
+  /* Slot + glide: JS moves the cookie between section slots via `translate`,
+     the transition makes each reposition a smooth drift. */
+  transition: translate 1100ms cubic-bezier(.25, .9, .35, 1.08);
+  will-change: translate;
+}
+@media (prefers-color-scheme: light) {
+  .floating-cookie { opacity: .13; }
+}
+@media (max-width: 767px) {
+  .floating-cookie { opacity: .07; }
+}
+@media (max-width: 479px) {
+  /* Small screens have no gutters — hide rather than risk covering text. */
+  .floating-cookie { display: none; }
+}
+/* Scroll-linked lean (JS sets `rotate` on this group). */
+.floating-cookie-rot {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+/* Idle life: slow rise/fall + gentle rotation, always composing with the lean. */
+.floating-cookie-float {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cookie-drift 11s ease-in-out infinite alternate;
+}
+@keyframes cookie-drift {
+  from { transform: translateY(-8px) rotate(-5deg); }
+  to { transform: translateY(10px) rotate(6deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }

@@ -4,6 +4,7 @@ import { Header } from "./components/layout/Header.jsx";
 import { Footer } from "./components/layout/Footer.jsx";
 import { ErrorBoundary } from "./components/common/ErrorBoundary.jsx";
 import { SplashScreen } from "./components/SplashScreen.jsx";
+import { FloatingCookie } from "./components/FloatingCookie.jsx";
 
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
 const DownloadsPage = lazy(() => import("./pages/DownloadsPage.jsx"));
@@ -23,6 +24,7 @@ export default function App() {
   return (
     <div className="flex min-h-screen flex-col">
       <SplashScreen />
+      <FloatingCookie />
       <Header />
       <main className="flex-1">
         <ErrorBoundary>
