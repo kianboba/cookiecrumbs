@@ -4,6 +4,7 @@ import { navLinks } from "../../data/navigation.js";
 import { siteConfig } from "../../data/siteConfig.js";
 import { Container } from "../common/Container.jsx";
 import { Icon } from "../common/Icon.jsx";
+import { ThemeToggle } from "../common/ThemeToggle.jsx";
 import logoUrl from "../../assets/cookiecrumbs-logo.svg";
 
 export function Header() {
@@ -41,6 +42,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <Link to="/downloads" className="btn-primary hidden sm:inline-flex">
               <Icon name="Download" className="h-4 w-4" />
               Download
@@ -81,6 +83,10 @@ export function Header() {
                   {l.label}
                 </NavLink>
               ))}
+              <div className="mt-3 flex items-center justify-between rounded-lg border border-ink-200 px-3 py-2">
+                <span className="text-sm text-ink-700">Theme</span>
+                <ThemeToggle />
+              </div>
               <Link
                 to="/downloads"
                 className="btn-primary mt-3"

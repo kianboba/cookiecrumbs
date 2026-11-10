@@ -15,7 +15,18 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage.jsx"));
 
 function Loading() {
   return (
-    <div className="container-page py-16 text-center text-ink-500">Loading…</div>
+    <div className="container-page py-16" role="status" aria-busy="true">
+      <span className="sr-only">Loading…</span>
+      <div className="mx-auto max-w-3xl" aria-hidden="true">
+        <span className="skeleton-line w-1/3" />
+        <span className="skeleton-line mt-4 w-2/3" />
+        <div className="skeleton-panel mt-8" />
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div className="skeleton-panel !h-40" />
+          <div className="skeleton-panel !h-40" />
+        </div>
+      </div>
+    </div>
   );
 }
 
